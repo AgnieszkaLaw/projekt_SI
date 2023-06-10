@@ -238,6 +238,10 @@
                     <source>action.register</source>
                     <target>Register</target>
                   </trans-unit>
+      <trans-unit id="label.username">
+                          <source>label.username</source>
+                          <target>Username</target>
+                        </trans-unit>
     </body>
   </file>
 </xliff>
