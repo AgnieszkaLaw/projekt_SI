@@ -37,5 +37,4 @@ interface ContactServiceInterface
      * @param Contact $contact Contact entity
      */
     public function delete(Contact $contact): void;
-
 }

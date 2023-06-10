@@ -8,9 +8,6 @@ namespace App\Service;
 use App\Repository\EventRepository;
 use App\Entity\User;
 use App\Repository\UserRepository;
-use App\Service\UserServiceInterface;
-use App\Service\NonUniqueResultException;
-use App\Service\NoResultException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -37,9 +34,9 @@ class UserService implements UserServiceInterface
     /**
      * Constructor.
      *
-     * @param UserRepository $userRepository User repository
-     * @param PaginatorInterface $paginator Paginator
-     * @param EventRepository $eventRepository
+     * @param UserRepository     $userRepository  User repository
+     * @param PaginatorInterface $paginator       Paginator
+     * @param EventRepository    $eventRepository Event repository
      */
     public function __construct(UserRepository $userRepository, PaginatorInterface $paginator, \App\Repository\EventRepository $eventRepository)
     {

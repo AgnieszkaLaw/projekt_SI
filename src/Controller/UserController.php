@@ -5,6 +5,7 @@
 
 namespace App\Controller;
 
+use App\Form\Type\UserNameType;
 use App\Form\Type\UserType;
 use App\Entity\User;
 use App\Service\UserServiceInterface;
@@ -21,7 +22,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 #[Route('/user')]
 class UserController extends AbstractController
 {
-
     /**
      * Password hasher.
      */
@@ -34,16 +34,14 @@ class UserController extends AbstractController
 
     /**
      * Translator.
-     *
-     * @var TranslatorInterface
      */
     private TranslatorInterface $translator;
 
     /**
      * Constructor.
      *
-     * @param UserServiceInterface $userService User service
-     * @param TranslatorInterface      $translator  Translator
+     * @param UserServiceInterface        $userService    User service
+     * @param TranslatorInterface         $translator     Translator
      * @param UserPasswordHasherInterface $passwordHasher Password hasher
      */
     public function __construct(UserServiceInterface $userService, TranslatorInterface $translator, UserPasswordHasherInterface $passwordHasher)
@@ -73,15 +71,15 @@ class UserController extends AbstractController
     /**
      * Edit action.
      *
-     * @param Request  $request  HTTP request
-     * @param User $user User entity
+     * @param Request $request HTTP request
+     * @param User    $user    User entity
      *
      * @return Response HTTP response
      */
     #[Route('/{id}/edit', name: 'user_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
     public function edit(Request $request, User $user): Response
     {
-        if (!(in_array('ROLE_ADMIN', ($this->getUser()->getRoles()), true))) {
+        if (!in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true)) {
             if ($user->getId() !== $this->getUser()->getId()) {
                 $this->addFlash(
                     'warning',
@@ -103,7 +101,6 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $user->setPassword(
                 $this->passwordHasher->hashPassword(
                     $user,
@@ -115,14 +112,74 @@ class UserController extends AbstractController
 
             $this->addFlash(
                 'success',
-                $this->translator->trans('message.created_successfully')
+                $this->translator->trans('message.edited_successfully')
             );
 
-            return $this->redirectToRoute('user_index');
+            if (in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true)) {
+                return $this->redirectToRoute('user_index');
+            }
+
+            return $this->redirectToRoute('event_index');
         }
 
         return $this->render(
             'user/edit.html.twig',
+            [
+                'form' => $form->createView(),
+                'user' => $user,
+            ]
+        );
+    }
+
+    /**
+     * EditName action.
+     *
+     * @param Request $request HTTP request
+     * @param User    $user    User entity
+     *
+     * @return Response HTTP response
+     */
+    #[Route('/{id}/editname', name: 'user_editname', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    public function editname(Request $request, User $user): Response
+    {
+        if (!in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true)) {
+            if ($user->getId() !== $this->getUser()->getId()) {
+                $this->addFlash(
+                    'warning',
+                    $this->translator->trans('message.record_not_found')
+                );
+
+                return $this->redirectToRoute('event_index');
+            }
+        }
+
+        $form = $this->createForm(
+            UserNameType::class,
+            $user,
+            [
+                'method' => 'PUT',
+                'action' => $this->generateUrl('user_editname', ['id' => $user->getId()]),
+            ]
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->userService->save($user);
+
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.edited_successfully')
+            );
+
+            if (in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true)) {
+                return $this->redirectToRoute('user_index');
+            }
+
+            return $this->redirectToRoute('event_index');
+        }
+
+        return $this->render(
+            'user/editname.html.twig',
             [
                 'form' => $form->createView(),
                 'user' => $user,

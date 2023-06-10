@@ -35,8 +35,8 @@ class CategoryService implements CategoryServiceInterface
      * Constructor.
      *
      * @param CategoryRepository $categoryRepository Category repository
-     * @param PaginatorInterface $paginator Paginator
-     * @param EventRepository $eventRepository
+     * @param PaginatorInterface $paginator          Paginator
+     * @param EventRepository    $eventRepository    Event repository
      */
     public function __construct(CategoryRepository $categoryRepository, PaginatorInterface $paginator, \App\Repository\EventRepository $eventRepository)
     {

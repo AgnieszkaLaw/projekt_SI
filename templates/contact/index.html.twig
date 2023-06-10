@@ -9,6 +9,11 @@
     <p><a href="{{ url('event_index') }}" title="{{ 'title.event_list'|trans }}">
             {{ 'title.event_list'|trans }}
         </a></p>
+    <p>
+        <a href="{{ url('contact_create')}}" title="{{ 'action.create'|trans }}">
+            {{ 'action.create'|trans }}
+        </a>
+    </p>
     {% if pagination is defined and pagination.items|length %}
 
         <div class="navigation text-center">
@@ -68,11 +73,6 @@
             <a href="{{ url('contact_index') }}" title="{{ 'label.reset_filters'|trans }}">
                 {{ 'label.reset_filters'|trans }}
             </a>
-            <p>
-                <a href="{{ url('contact_create')}}" title="{{ 'action.create'|trans }}">
-                    {{ 'action.create'|trans }}
-                </a>
-            </p>
             </tbody>
         </table>
 

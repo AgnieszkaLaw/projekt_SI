@@ -7,7 +7,6 @@ namespace App\Entity;
 
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -22,8 +21,6 @@ class Category
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -32,25 +29,38 @@ class Category
 
     /**
      * Name.
-     *
-     * @var string|null
      */
     #[ORM\Column(length: 45)]
     #[Assert\Type('string')]
     #[Assert\NotBlank]
-    #[Assert\Length(min: 3, max:45)]
+    #[Assert\Length(min: 3, max: 45)]
     private ?string $name = null;
 
+    /**
+     * Getter for Id.
+     *
+     * @return int|null Id
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter for name.
+     *
+     * @return string|null Name
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * Setter for name.
+     *
+     * @param string|null $name Name
+     */
     public function setName(?string $name): void
     {
         $this->name = $name;

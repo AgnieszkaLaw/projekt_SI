@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * User entity.
+ */
+
 namespace App\Entity;
 
 use App\Entity\Enum\UserRole;
@@ -21,8 +25,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -31,8 +33,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Email.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\NotBlank]
@@ -49,28 +49,52 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Password.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string')]
-    #[Assert\NotBlank]
     private ?string $password;
 
+    /**
+     * Name.
+     */
+    #[Assert\Type('string')]
+    #[ORM\Column(length: 255, nullable: false)]
+    private ?string $name;
+
+    /**
+     * converter to string.
+     *
+     * @return string getUserIdentifier
+     */
     public function __toString()
     {
-        return (string) $this->getUserIdentifier();
+        return $this->getUserIdentifier();
     }
 
+    /**
+     * Getter for id.
+     *
+     * @return int|null Id
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter for email.
+     *
+     * @return string|null Email
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * Setter for email.
+     *
+     * @param string $email Email
+     */
     public function setEmail(string $email): void
     {
         $this->email = $email;
@@ -125,6 +149,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * Getter for password.
+     *
+     * @return string|null Password
+     *
      * @see PasswordAuthenticatedUserInterface
      */
     public function getPassword(): ?string
@@ -147,6 +175,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
      *
      * @see UserInterface
+     *
+     * @return string|null Salt
      */
     public function getSalt(): ?string
     {
@@ -160,5 +190,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * Getter for name.
+     *
+     * @return string|null Name
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * Setter for name.
+     *
+     * @param string|null $name Name
+     */
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
     }
 }

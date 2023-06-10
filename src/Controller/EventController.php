@@ -9,6 +9,7 @@ use App\Entity\Event;
 use App\Entity\User;
 use App\Form\Type\EventType;
 use App\Service\EventServiceInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,7 +37,7 @@ class EventController extends AbstractController
      * Constructor.
      *
      * @param EventServiceInterface $eventService Event service
-     * @param TranslatorInterface  $translator  Translator
+     * @param TranslatorInterface   $translator   Translator
      */
     public function __construct(EventServiceInterface $eventService, TranslatorInterface $translator)
     {
@@ -90,6 +91,7 @@ class EventController extends AbstractController
                 'warning',
                 $this->translator->trans('message.record_not_found')
             );
+
             return $this->redirectToRoute('event_index');
         }
 
@@ -106,7 +108,7 @@ class EventController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/create', name: 'event_create', methods: 'GET|POST', )]
+    #[Route('/create', name: 'event_create', methods: 'GET|POST')]
     public function create(Request $request): Response
     {
         /** @var User $user */
@@ -131,14 +133,14 @@ class EventController extends AbstractController
             return $this->redirectToRoute('event_index');
         }
 
-        return $this->render('event/create.html.twig',  ['form' => $form->createView()]);
+        return $this->render('event/create.html.twig', ['form' => $form->createView()]);
     }
 
     /**
      * Edit action.
      *
      * @param Request $request HTTP request
-     * @param Event    $event    Event entity
+     * @param Event   $event   Event entity
      *
      * @return Response HTTP response
      */
@@ -151,6 +153,7 @@ class EventController extends AbstractController
                 'warning',
                 $this->translator->trans('message.record_not_found')
             );
+
             return $this->redirectToRoute('event_index');
         }
 
@@ -188,7 +191,7 @@ class EventController extends AbstractController
      * Delete action.
      *
      * @param Request $request HTTP request
-     * @param Event    $event    Event entity
+     * @param Event   $event   Event entity
      *
      * @return Response HTTP response
      */
@@ -201,6 +204,7 @@ class EventController extends AbstractController
                 'warning',
                 $this->translator->trans('message.record_not_found')
             );
+
             return $this->redirectToRoute('event_index');
         }
 

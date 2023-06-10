@@ -9,7 +9,6 @@ use App\Entity\Category;
 use App\Entity\Tag;
 use App\Entity\Event;
 use App\Entity\User;
-use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
@@ -35,12 +34,12 @@ class EventFixtures extends AbstractBaseFixtures implements DependentFixtureInte
             $event->setName($this->faker->sentence);
             $event->setNote($this->faker->sentence);
             $event->setStartDate(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-5 days', '+50 days')
                 )
             );
             $event->setEndDate(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-5 days', '+70 days')
                 )
             );

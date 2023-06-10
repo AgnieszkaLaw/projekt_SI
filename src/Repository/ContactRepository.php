@@ -1,4 +1,7 @@
 <?php
+/**
+ * Contact repository.
+ */
 
 namespace App\Repository;
 
@@ -8,8 +11,6 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 
 /**
@@ -60,18 +61,6 @@ class ContactRepository extends ServiceEntityRepository
     }
 
     /**
-     * Get or create new query builder.
-     *
-     * @param QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('contact');
-    }
-
-    /**
      * Save entity.
      *
      * @param Contact $contact Contact entity
@@ -96,7 +85,7 @@ class ContactRepository extends ServiceEntityRepository
     /**
      * Query contacts by author.
      *
-     * @param User $user User entity
+     * @param User                  $user    User entity
      * @param array<string, object> $filters Filters
      *
      * @return QueryBuilder Query builder
@@ -112,6 +101,18 @@ class ContactRepository extends ServiceEntityRepository
     }
 
     /**
+     * Get or create new query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('contact');
+    }
+
+    /**
      * Apply filters to paginated list.
      *
      * @param QueryBuilder          $queryBuilder Query builder
@@ -121,7 +122,6 @@ class ContactRepository extends ServiceEntityRepository
      */
     private function applyFiltersToList(QueryBuilder $queryBuilder, array $filters = []): QueryBuilder
     {
-
         if (isset($filters['tag']) && $filters['tag'] instanceof Tag) {
             $queryBuilder->andWhere('tags IN (:tag)')
                 ->setParameter('tag', $filters['tag']);

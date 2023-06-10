@@ -18,11 +18,14 @@
         {% block body %}{% endblock %}
     </div>
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <div>{{ app.user.email }}</div>
+        <div>{{ app.user.name }}</div>
         <div>
             <a href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a>
             <a href="{{ url('user_edit', {id: app.user.id}) }}" title="{{ 'action.edit_profile'|trans }}">
                 {{ 'action.edit_profile'|trans }}
+            </a>
+            <a href="{{ url('user_editname', {id: app.user.id}) }}" title="{{ 'action.edit_profile_name'|trans }}">
+                {{ 'action.edit_profile_name'|trans }}
             </a>
         </div>
     {% endif %}

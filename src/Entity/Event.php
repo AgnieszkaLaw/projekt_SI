@@ -1,14 +1,16 @@
 <?php
 
+/**
+ * Event entity.
+ */
+
 namespace App\Entity;
 
 use App\Repository\EventRepository;
-use DateImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -20,8 +22,6 @@ class Event
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -30,8 +30,6 @@ class Event
 
     /**
      * Name.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\Type('string')]
@@ -71,8 +69,6 @@ class Event
 
     /**
      * Author.
-     *
-     * @var User|null
      */
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: false)]
@@ -80,61 +76,119 @@ class Event
     #[Assert\Type(User::class)]
     private ?User $author;
 
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         $this->tags = new ArrayCollection();
     }
 
+    /**
+     * Getter for Id.
+     *
+     * @return int|null Id
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter for name.
+     *
+     * @return string|null Name
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * Setter for name.
+     *
+     * @param string|null $name Name
+     */
     public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
+    /**
+     * Getter for note.
+     *
+     * @return string|null Note
+     */
     public function getNote(): ?string
     {
         return $this->note;
     }
 
+    /**
+     * Setter for note.
+     *
+     * @param string|null $note Note
+     */
     public function setNote(?string $note): void
     {
         $this->note = $note;
     }
 
+    /**
+     * Getter for startDate.
+     *
+     * @return DateTimeInterface|null StartDate
+     */
     public function getStartDate(): ?\DateTimeInterface
     {
         return $this->startDate;
     }
 
+    /**
+     * Setter for startDate.
+     *
+     * @param DateTimeInterface $startDate StartDate
+     */
     public function setStartDate(?\DateTimeInterface $startDate): void
     {
         $this->startDate = $startDate;
     }
 
+    /**
+     * Getter for endDate.
+     *
+     * @return DateTimeInterface|null EndDate
+     */
     public function getEndDate(): ?\DateTimeInterface
     {
         return $this->endDate;
     }
 
+    /**
+     * Setter for endDate.
+     *
+     * @param DateTimeInterface $endDate EndDate
+     */
     public function setEndDate(?\DateTimeInterface $endDate): void
     {
         $this->endDate = $endDate;
     }
 
+    /**
+     * Getter for category.
+     *
+     * @return Category|null Category
+     */
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
+    /**
+     * Setter for category.
+     *
+     * @param Category|null $category Category
+     */
     public function setCategory(?Category $category): void
     {
         $this->category = $category;
@@ -172,15 +226,23 @@ class Event
         $this->tags->removeElement($tag);
     }
 
+    /**
+     * Getter for author.
+     *
+     * @return string|null Author
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(?User $author): self
+    /**
+     * Setter for author.
+     *
+     * @param string|null $author Author
+     */
+    public function setAuthor(?User $author): void
     {
         $this->author = $author;
-
-        return $this;
     }
 }

@@ -132,8 +132,16 @@
             </trans-unit>
       <trans-unit id="action.edit_profile">
               <source>action.edit_profile</source>
-              <target>Edit profile</target>
+              <target>Change password</target>
             </trans-unit>
+      <trans-unit id="label.rpPassword">
+                                <source>label.rpPassword</source>
+                                <target>Repeat password</target>
+                              </trans-unit>
+      <trans-unit id="message.fields_must_match">
+                          <source>message.fields_must_match</source>
+                          <target>Fields must match</target>
+                        </trans-unit>
       <trans-unit id="message.edited_successfully">
               <source>message.edited_successfully</source>
               <target>Changes saved</target>
@@ -214,6 +222,22 @@
               <source>label.category_filter</source>
               <target>Filter by category</target>
             </trans-unit>
+      <trans-unit id="title.user_editname">
+                    <source>title.user_editname</source>
+                    <target>Edit name</target>
+                  </trans-unit>
+      <trans-unit id="action.edit_profile_name">
+                    <source>action.edit_profile_name</source>
+                    <target>Edit profile</target>
+                  </trans-unit>
+      <trans-unit id="label.pass">
+                    <source>label.pass</source>
+                    <target>Password</target>
+                  </trans-unit>
+      <trans-unit id="action.register">
+                    <source>action.register</source>
+                    <target>Register</target>
+                  </trans-unit>
     </body>
   </file>
 </xliff>

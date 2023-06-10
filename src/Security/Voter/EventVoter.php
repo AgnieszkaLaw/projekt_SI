@@ -40,8 +40,6 @@ class EventVoter extends Voter
 
     /**
      * Security helper.
-     *
-     * @var Security
      */
     private Security $security;
 
@@ -102,7 +100,7 @@ class EventVoter extends Voter
      * Checks if user can edit event.
      *
      * @param Event $event Event entity
-     * @param User $user User
+     * @param User  $user  User
      *
      * @return bool Result
      */
@@ -115,7 +113,7 @@ class EventVoter extends Voter
      * Checks if user can view event.
      *
      * @param Event $event Event entity
-     * @param User $user User
+     * @param User  $user  User
      *
      * @return bool Result
      */
@@ -128,7 +126,7 @@ class EventVoter extends Voter
      * Checks if user can delete event.
      *
      * @param Event $event Event entity
-     * @param User $user User
+     * @param User  $user  User
      *
      * @return bool Result
      */
@@ -137,4 +135,3 @@ class EventVoter extends Voter
         return $event->getAuthor() === $user;
     }
 }
-

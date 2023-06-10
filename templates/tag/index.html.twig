@@ -12,6 +12,11 @@
     <p><a href="{{ url('category_index') }}" title="{{ 'category.event_list'|trans }}">
             {{ 'category.event_list'|trans }}
         </a></p>
+    <p>
+        <a href="{{ url('tag_create')}}" title="{{ 'action.create'|trans }}">
+            {{ 'action.create'|trans }}
+        </a>
+    </p>
     {% if pagination is defined and pagination.items|length %}
 
         <div class="navigation text-center">
@@ -41,11 +46,6 @@
                     </td>
                 </tr>
             {% endfor %}
-            <p>
-                <a href="{{ url('tag_create')}}" title="{{ 'action.create'|trans }}">
-                    {{ 'action.create'|trans }}
-                </a>
-            </p>
             </tbody>
         </table>
 

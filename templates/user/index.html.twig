@@ -23,7 +23,7 @@
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'user.id') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.email'|trans, 'user.email') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.password'|trans, 'user.password') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.name'|trans, 'user.name') }}</th>
                 <th>{{ 'label.actions'|trans }}</th>
             </tr>
             </thead>
@@ -32,10 +32,13 @@
                 <tr>
                     <td>{{ user.id }}</td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.password }}</td>
+                    <td>{{ user.name }}</td>
                     <td>
-                        <a class="btn btn-outline-success" href="{{ url('user_edit', {id: user.id}) }}" title="{{ 'action.edit'|trans }}">
+                        <a class="btn btn-outline-success" href="{{ url('user_editname', {id: user.id}) }}" title="{{ 'action.edit'|trans }}">
                             {{ 'action.edit'|trans }}
+                        </a>
+                        <a class="btn btn-outline-danger" href="{{ url('user_edit', {id: user.id}) }}" title="{{ 'action.edit_profile'|trans }}">
+                            {{ 'action.edit_profile'|trans }}
                         </a>
                     </td>
                 </tr>

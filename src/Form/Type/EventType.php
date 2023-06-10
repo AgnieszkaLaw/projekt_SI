@@ -22,8 +22,6 @@ class EventType extends AbstractType
 {
     /**
      * Tags data transformer.
-     *
-     * @var TagsDataTransformer
      */
     private TagsDataTransformer $tagsDataTransformer;
 
@@ -57,7 +55,8 @@ class EventType extends AbstractType
                 'label' => 'label.name',
                 'required' => true,
                 'attr' => ['max_length' => 255],
-            ]);
+            ]
+        );
         $builder->add(
             'category',
             EntityType::class,
@@ -77,14 +76,16 @@ class EventType extends AbstractType
             [
                 'label' => 'label.startDate',
                 'required' => true,
-            ]);
+            ]
+        );
         $builder->add(
             'endDate',
             DateType::class,
             [
                 'label' => 'label.endDate',
                 'required' => true,
-            ]);
+            ]
+        );
         $builder->add(
             'note',
             TextType::class,
@@ -92,7 +93,8 @@ class EventType extends AbstractType
                 'label' => 'label.note',
                 'required' => false,
                 'attr' => ['max_length' => 255],
-            ]);
+            ]
+        );
         $builder->add(
             'tags',
             TextType::class,

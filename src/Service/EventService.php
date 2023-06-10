@@ -42,14 +42,10 @@ class EventService implements EventServiceInterface
      * @param CategoryServiceInterface $categoryService Category service
      * @param PaginatorInterface       $paginator       Paginator
      * @param TagServiceInterface      $tagService      Tag service
-     * @param EventRepository          $eventRepository  Event repository
+     * @param EventRepository          $eventRepository Event repository
      */
-    public function __construct(
-        CategoryServiceInterface $categoryService,
-        PaginatorInterface $paginator,
-        TagServiceInterface $tagService,
-        EventRepository $eventRepository
-    ) {
+    public function __construct(CategoryServiceInterface $categoryService, PaginatorInterface $paginator, TagServiceInterface $tagService, EventRepository $eventRepository)
+    {
         $this->categoryService = $categoryService;
         $this->paginator = $paginator;
         $this->tagService = $tagService;

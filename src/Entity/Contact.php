@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Contact entity.
+ */
+
 namespace App\Entity;
 
 use App\Repository\ContactRepository;
@@ -18,8 +22,6 @@ class Contact
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -28,8 +30,6 @@ class Contact
 
     /**
      * Name.
-     *
-     * @var string|null
      */
     #[ORM\Column(length: 255)]
     #[Assert\Type('string')]
@@ -58,8 +58,6 @@ class Contact
 
     /**
      * Author.
-     *
-     * @var User|null
      */
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: false)]
@@ -67,51 +65,99 @@ class Contact
     #[Assert\Type(User::class)]
     private ?User $author;
 
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         $this->tags = new ArrayCollection();
     }
 
+    /**
+     * Getter for Id.
+     *
+     * @return int|null Id
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter for name.
+     *
+     * @return string|null Name
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * Setter for name.
+     *
+     * @param string|null $name Name
+     */
     public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
+    /**
+     * Getter for email.
+     *
+     * @return string|null Email
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * Setter for email.
+     *
+     * @param string|null $email Email
+     */
     public function setEmail(?string $email): void
     {
         $this->email = $email;
     }
 
+    /**
+     * Getter for phoneNumber.
+     *
+     * @return string|null PhoneNumber
+     */
     public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;
     }
 
+    /**
+     * Setter for phoneNumber.
+     *
+     * @param string|null $phoneNumber PhoneNumber
+     */
     public function setPhoneNumber(?string $phoneNumber): void
     {
         $this->phoneNumber = $phoneNumber;
     }
 
+    /**
+     * Getter for note.
+     *
+     * @return string|null Note
+     */
     public function getNote(): ?string
     {
         return $this->note;
     }
 
+    /**
+     * Setter for note.
+     *
+     * @param string|null $note Note
+     */
     public function setNote(?string $note): void
     {
         $this->note = $note;
@@ -149,15 +195,23 @@ class Contact
         $this->tags->removeElement($tag);
     }
 
+    /**
+     * Getter for author.
+     *
+     * @return string|null Author
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(?User $author): self
+    /**
+     * Setter for author.
+     *
+     * @param string|null $author Author
+     */
+    public function setAuthor(?User $author): void
     {
         $this->author = $author;
-
-        return $this;
     }
 }

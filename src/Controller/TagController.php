@@ -28,8 +28,6 @@ class TagController extends AbstractController
 
     /**
      * Translator.
-     *
-     * @var TranslatorInterface
      */
     private TranslatorInterface $translator;
 
@@ -37,7 +35,7 @@ class TagController extends AbstractController
      * Constructor.
      *
      * @param TagServiceInterface $tagService Tag service
-     * @param TranslatorInterface $translator  Translator
+     * @param TranslatorInterface $translator Translator
      */
     public function __construct(TagServiceInterface $tagService, TranslatorInterface $translator)
     {
@@ -100,8 +98,8 @@ class TagController extends AbstractController
     /**
      * Edit action.
      *
-     * @param Request  $request  HTTP request
-     * @param Tag $tag Tag entity
+     * @param Request $request HTTP request
+     * @param Tag     $tag     Tag entity
      *
      * @return Response HTTP response
      */
@@ -123,7 +121,7 @@ class TagController extends AbstractController
 
             $this->addFlash(
                 'success',
-                $this->translator->trans('message.created_successfully')
+                $this->translator->trans('message.edited_successfully')
             );
 
             return $this->redirectToRoute('tag_index');
@@ -141,15 +139,14 @@ class TagController extends AbstractController
     /**
      * Delete action.
      *
-     * @param Request  $request  HTTP request
-     * @param Tag $tag Tag entity
+     * @param Request $request HTTP request
+     * @param Tag     $tag     Tag entity
      *
      * @return Response HTTP response
      */
     #[Route('/{id}/delete', name: 'tag_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
     public function delete(Request $request, Tag $tag): Response
     {
-
         $form = $this->createForm(FormType::class, $tag, [
             'method' => 'DELETE',
             'action' => $this->generateUrl('tag_delete', ['id' => $tag->getId()]),
@@ -176,4 +173,3 @@ class TagController extends AbstractController
         );
     }
 }
-

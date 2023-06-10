@@ -37,5 +37,4 @@ interface EventServiceInterface
      * @param Event $event Event entity
      */
     public function delete(Event $event): void;
-
 }

@@ -29,7 +29,14 @@ interface UserServiceInterface
      */
     public function save(User $user): void;
 
+    /**
+     * Find by id.
+     *
+     * @param int $id User id
+     *
+     * @return User|null User entity
+     *
+     * @throws NonUniqueResultException
+     */
     public function findOneById(int $id): ?User;
-
 }
-
