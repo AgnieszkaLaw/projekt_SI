@@ -66,7 +66,7 @@ class EventType extends AbstractType
                     return $category->getName();
                 },
                 'label' => 'label_category',
-                'placeholder' => 'label.none',
+                'placeholder' => '---',
                 'required' => true,
             ]
         );

@@ -24,7 +24,6 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'event.id') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.name'|trans, 'event.name') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.startDate'|trans, 'event.startDate') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.endDate'|trans, 'event.endDate') }}</th>
@@ -37,7 +36,6 @@
             {% for event in pagination.items %}
                 {%  if date(event.endDate) > date('now') %}
                 <tr>
-                    <td>{{ event.id }}</td>
                     <td>{{ event.name }}</td>
                     <td>{{ event.startDate|format_date('long') }}</td>
                     <td>{{ event.endDate|format_date('long') }}</td>
