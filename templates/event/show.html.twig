@@ -17,7 +17,7 @@
             <dt>{{ 'label.endDate'|trans }}</dt>
             <dd>{{ event.endDate|format_date('long') }}</dd>
             <dt>{{ 'label.description'|trans }}</dt>
-            <dd>{{ event.note|markdown_to_html }}</dd>
+            <dd>{{ event.note }}</dd>
             <dt>{{ 'label_category'|trans }}</dt>
             <dd>{{  event.category.name }}</dd>
             <dt>{{ 'label.tags'|trans }}</dt>

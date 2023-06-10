@@ -17,7 +17,7 @@
             <dt>{{ 'label.phoneNumber'|trans }}</dt>
             <dd>{{  contact.phoneNumber }}</dd>
             <dt>{{ 'label.note'|trans }}</dt>
-            <dd>{{ contact.note|markdown_to_html }}</dd>
+            <dd>{{ contact.note }}</dd>
             <dt>{{ 'label.tags'|trans }}</dt>
             <dd>{% for tag in contact.tags %}
                     {{ tag.name }}{% if not loop.last %},{% endif %}
