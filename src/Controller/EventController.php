@@ -86,15 +86,6 @@ class EventController extends AbstractController
     #[IsGranted('VIEW', subject: 'event')]
     public function show(Event $event): Response
     {
-        if ($event->getAuthor() !== $this->getUser()) {
-            $this->addFlash(
-                'warning',
-                $this->translator->trans('message.record_not_found')
-            );
-
-            return $this->redirectToRoute('event_index');
-        }
-
         return $this->render(
             'event/show.html.twig',
             ['event' => $event]
@@ -148,14 +139,6 @@ class EventController extends AbstractController
     #[IsGranted('EDIT', subject: 'event')]
     public function edit(Request $request, Event $event): Response
     {
-        if ($event->getAuthor() !== $this->getUser()) {
-            $this->addFlash(
-                'warning',
-                $this->translator->trans('message.record_not_found')
-            );
-
-            return $this->redirectToRoute('event_index');
-        }
 
         $form = $this->createForm(
             EventType::class,
@@ -199,14 +182,6 @@ class EventController extends AbstractController
     #[IsGranted('DELETE', subject: 'event')]
     public function delete(Request $request, Event $event): Response
     {
-        if ($event->getAuthor() !== $this->getUser()) {
-            $this->addFlash(
-                'warning',
-                $this->translator->trans('message.record_not_found')
-            );
-
-            return $this->redirectToRoute('event_index');
-        }
 
         $form = $this->createForm(
             FormType::class,

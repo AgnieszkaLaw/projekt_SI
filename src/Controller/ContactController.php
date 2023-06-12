@@ -86,15 +86,6 @@ class ContactController extends AbstractController
     #[IsGranted('VIEW', subject: 'contact')]
     public function show(Contact $contact): Response
     {
-        if ($contact->getAuthor() !== $this->getUser()) {
-            $this->addFlash(
-                'warning',
-                $this->translator->trans('message.record_not_found')
-            );
-
-            return $this->redirectToRoute('contact_index');
-        }
-
         return $this->render(
             'contact/show.html.twig',
             ['contact' => $contact]
@@ -148,15 +139,6 @@ class ContactController extends AbstractController
     #[IsGranted('EDIT', subject: 'contact')]
     public function edit(Request $request, Contact $contact): Response
     {
-        if ($contact->getAuthor() !== $this->getUser()) {
-            $this->addFlash(
-                'warning',
-                $this->translator->trans('message.record_not_found')
-            );
-
-            return $this->redirectToRoute('contact_index');
-        }
-
         $form = $this->createForm(
             ContactType::class,
             $contact,
@@ -199,14 +181,6 @@ class ContactController extends AbstractController
     #[IsGranted('DELETE', subject: 'contact')]
     public function delete(Request $request, Contact $contact): Response
     {
-        if ($contact->getAuthor() !== $this->getUser()) {
-            $this->addFlash(
-                'warning',
-                $this->translator->trans('message.record_not_found')
-            );
-
-            return $this->redirectToRoute('contact_index');
-        }
 
         $form = $this->createForm(
             FormType::class,
